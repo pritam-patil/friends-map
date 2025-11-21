@@ -36,7 +36,7 @@ export default function Home() {
     setFriends(prev => [...prev, newFriend]);
 
     try {
-      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+       await fetch(GOOGLE_APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors', // Important for Apps Script web apps
         headers: {
