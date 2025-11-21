@@ -8,6 +8,8 @@ import { Friend } from '../data/friends';
 
 // 1. Replace this with the URL of your published Google Sheet CSV
 const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR27x7k8_scXZ5GSR9RWq9_AFEWICe0xIVHETy-vUb8YznHvx54ZREM6ReE1sfStnxSfrkyrBeU5_UW/pub?gid=0&single=true&output=csv';
+// const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMBXC1j5KsQ0Qnsyltu9t72ZgQ2sFJr_OqY8IlsBMk9SNAacGW6rpIsXrzOySkTfxz/exec'; // 2. Replace with your deployed Apps Script URL
+const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5JFSflmN8YWRlo76SDdxuffldXbnnM3L15jESUM_8_gJX7mA2sMx9V_g7MmafczuI/exec'; // 2. Replace with your deployed Apps Script URL
 
 export default function Home() {
   const [friends, setFriends] = useState<Friend[]>([]);
@@ -29,8 +31,30 @@ export default function Home() {
     });
   }, []);
 
-  function addFriend(newFriend: Friend) {
+  async function addFriend(newFriend: Friend) {
+    // Optimistically update the UI
     setFriends(prev => [...prev, newFriend]);
+
+    try {
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Important for Apps Script web apps
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFriend),
+      });
+
+      // NOTE: Because of 'no-cors', we can't actually read the response.
+      // We assume it's successful if the request doesn't throw an error.
+      // For more robust error handling, a more advanced setup (like a proper backend) is needed.
+      console.log('Successfully sent data to Google Sheet.');
+
+    } catch (error) {
+      console.error('Error saving friend to Google Sheet:', error);
+      // Optional: Implement logic to revert the optimistic UI update on failure
+    }
+
     setOpenForm(false);
   }
 
