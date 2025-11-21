@@ -4,13 +4,16 @@ import './index.css';
 import App from './pages/Home';
 import reportWebVitals from './reportWebVitals';
 import 'leaflet/dist/leaflet.css';
+import KeycloakBackdrop from './components/KeycloakBackdrop';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <KeycloakBackdrop>
+      <App />
+    </KeycloakBackdrop>
   </React.StrictMode>
 );
 
