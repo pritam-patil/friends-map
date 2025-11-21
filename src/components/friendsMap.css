@@ -1,0 +1,55 @@
+/* src/components/FriendsMap.css */
+.friends-map-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 520px;
+  position: relative;
+  z-index: 1;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  background: #fff;
+  z-index: 2000;
+}
+
+.controls input {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.controls .stats {
+  font-size: 12px;
+  color: #444;
+}
+
+.map-wrapper {
+  flex: 1;
+  height: calc(100% - 64px);
+  position: relative;
+}
+
+/* Fit-to-bounds control — absolute overlay */
+.fit-bounds-control {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1500;
+  pointer-events: auto;
+}
+
+.fit-bounds-control button {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
