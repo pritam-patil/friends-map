@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from 'react-lea
 import L from 'leaflet';
 import { Friend } from '../data/friends';
 import { getCoordsFromAddress } from './geocoding';
+import './addFriendForm.css';
 
 const defaultIcon = new L.Icon({
   iconUrl:
@@ -80,7 +81,7 @@ export default function AddFriendForm({ onSubmit }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="add-friend-form" onSubmit={handleSubmit}>
       <h2>Add Friend</h2>
 
       <label>Name *</label>
@@ -90,9 +91,9 @@ export default function AddFriendForm({ onSubmit }: Props) {
       <input name="From" value={formState.From} onChange={handleInputChange} />
 
       <label>Present Address *</label>
-      <div style={{ display: 'flex', gap: 8 }}>
-        <input name="Present Address" value={formState['Present Address']} onChange={handleInputChange} style={{ flex: 1 }} required />
-        <button type="button" onClick={handleGeocode} disabled={isGeocoding}>
+      <div className="address-group">
+        <input name="Present Address" value={formState['Present Address']} onChange={handleInputChange} required />
+        <button type="button" className="find-button" onClick={handleGeocode} disabled={isGeocoding}>
           {isGeocoding ? 'Finding...' : 'Find on Map'}
         </button>
       </div>
@@ -127,19 +128,7 @@ export default function AddFriendForm({ onSubmit }: Props) {
         </MapContainer>
       </div>
 
-      <button
-        type="submit"
-        style={{
-          padding: '10px 14px',
-          background: '#28a745',
-          border: 'none',
-          color: '#fff',
-          borderRadius: 6,
-          cursor: 'pointer',
-          width: '100%',
-          marginTop: 10,
-        }}
-      >
+      <button type="submit" className="submit-button">
         Save Friend
       </button>
     </form>
