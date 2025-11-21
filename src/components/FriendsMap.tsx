@@ -125,6 +125,7 @@ export default function FriendsMap({ friends = [], initialCenter = [21, 78], ini
           zoom={initialZoom}
           scrollWheelZoom={true}
           style={{ height: '100%', width: '100%' }}
+          // @ts-ignore
           whenCreated={onMapCreated}
         >
           <TileLayer

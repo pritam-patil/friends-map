@@ -19,7 +19,7 @@ export default function Home() {
     Papa.parse<Friend>(GOOGLE_SHEET_CSV_URL, {
       download: true,
       header: true, // Assumes first row in CSV is header
-      complete: (results) => {
+      complete: (results: { data: any[]; }) => {
         // The parsed data needs to be mapped to the Friend type, especially for lat/lng
         const friendsData = results.data.map(friend => ({
           ...friend,
