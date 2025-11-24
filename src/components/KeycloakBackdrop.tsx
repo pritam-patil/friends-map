@@ -5,7 +5,7 @@ interface KeycloakBackdropProps {
   children: React.ReactNode;
 }
 
-const CORRECT_KEY = process.env.REACT_APP_ACCESS_KEY || 'YHK'; // This should be stored more securely in a real application
+const CORRECT_KEY = process.env.REACT_APP_ACCESS_KEY
 
 const KeycloakBackdrop: React.FC<KeycloakBackdropProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
