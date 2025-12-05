@@ -1,5 +1,5 @@
 // src/pages/Home.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Papa from 'papaparse';
 import FriendsMap from '../components/FriendsMap';
 import AddFriendForm from '../components/AddFriendForm';
@@ -31,6 +31,10 @@ export default function Home() {
     });
   }, []);
 
+  const onRecenterMap = useCallback(() => {
+    document.getElementById('recenter-map')?.click();
+  }, []);
+
   async function addFriend(newFriend: Friend) {
     // Optimistically update the UI
     setFriends(prev => [...prev, newFriend]);
@@ -49,7 +53,7 @@ export default function Home() {
       // We assume it's successful if the request doesn't throw an error.
       // For more robust error handling, a more advanced setup (like a proper backend) is needed.
       console.log('Successfully sent data to Google Sheet.');
-
+      onRecenterMap();
     } catch (error) {
       console.error('Error saving friend to Google Sheet:', error);
       // Optional: Implement logic to revert the optimistic UI update on failure
@@ -60,7 +64,6 @@ export default function Home() {
 
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative' }}>
-      {/* Add Friend Button */}
       <button
         style={{
           position: 'absolute',
@@ -79,10 +82,8 @@ export default function Home() {
         + Add Friend
       </button>
 
-      {/* Map */}
-        <FriendsMap friends={friends} />
+      <FriendsMap friends={friends} onSearch={onRecenterMap} />
 
-      {/* Modal with Form */}
       <Modal open={openForm} onClose={() => setOpenForm(false)}>
         <AddFriendForm onSubmit={addFriend} />
       </Modal>

@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+env:
+  REACT_APP_ACCESS_KEY: "YHK"
+
 jobs:
   build-and-deploy:
     permissions:
