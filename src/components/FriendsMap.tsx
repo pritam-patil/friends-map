@@ -134,10 +134,6 @@ export default function FriendsMap({ friends = [], initialCenter = [21, 78], ini
     };
 
     geocodeFriends();
-
-    if (typeof onSearch === 'function') {
-      onSearch();
-    }
   }, [friends]);
 
   const filtered = useMemo(() =>
@@ -162,6 +158,10 @@ export default function FriendsMap({ friends = [], initialCenter = [21, 78], ini
       map.fitBounds(bounds, { padding: [60, 60] });
     } else {
       map.setView(INDIA_BOUNDS, 4); // India default
+    }
+
+    if (typeof onSearch === 'function') {
+      onSearch();
     }
   }
 
@@ -204,15 +204,15 @@ export default function FriendsMap({ friends = [], initialCenter = [21, 78], ini
               icon={defaultIcon}
             >
               <Popup>
-                <div style={{ minWidth: 200 }}>
+                <div style={{ minWidth: 200 }} className='contact-card'>
                   <strong>{friend.Name}</strong>
                   <div style={{ marginTop: 6 }}>
                     <div><small>From: {friend.From}</small></div>
                     <div><small>Address: {friend['Present Address']}</small></div>
                     <div><small>Profession: {friend.Profession}</small></div>
                   </div>
-                  <div style={{ marginTop: 8, display: 'flex', justifyContent: 'center', gap: 8 }}>
-                    <input className='call-action' type="tel" placeholder='Call' value={friend.Mobile} readOnly style={{ flex: 0, textAlign: 'center' }} />
+                  <div style={{ marginTop: 8, display: 'flex', justifyContent: 'center', gap: 8 }} className='wrapper'>
+                    <a href={`tel:${friend.Mobile}`} className='call-action'>Call</a>
                   </div>
                 </div>
               </Popup>

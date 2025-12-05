@@ -33,7 +33,7 @@ export default function Home() {
 
   const onRecenterMap = useCallback(() => {
     document.getElementById('recenter-map')?.click();
-  }, [friends]);
+  }, []);
 
   async function addFriend(newFriend: Friend) {
     // Optimistically update the UI
