@@ -107,9 +107,6 @@ export default function AddFriendForm({ onSubmit }: Props) {
       <label>Birth date</label>
       <input name="Birth date" value={formState['Birth date']} onChange={handleInputChange} type="date" />
 
-      <label>Mobile Number</label>
-      <input name="Mobile number" value={formState['Mobile']} onChange={handleInputChange} type="number" />
-
       <label>Location on Map *</label>
       <div style={{ height: 250, width: '100%', marginBottom: 12 }}>
         <MapContainer
