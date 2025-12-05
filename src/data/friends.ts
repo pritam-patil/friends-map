@@ -9,5 +9,4 @@ export type Friend = {
   lat: number;
   lng: number;
   Mobile?: number;
-  // mobile and page loader and card styles
 };
