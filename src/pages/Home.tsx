@@ -1,5 +1,5 @@
 // src/pages/Home.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Papa from 'papaparse';
 import FriendsMap from '../components/FriendsMap';
 import AddFriendForm from '../components/AddFriendForm';
@@ -31,9 +31,9 @@ export default function Home() {
     });
   }, []);
 
-  const onRecenterMap = () => {
+  const onRecenterMap = useCallback(() => {
     document.getElementById('recenter-map')?.click();
-  }
+  }, [friends]);
 
   async function addFriend(newFriend: Friend) {
     // Optimistically update the UI
