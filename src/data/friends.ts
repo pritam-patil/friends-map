@@ -8,4 +8,5 @@ export type Friend = {
   'Birth date': string;
   lat: number;
   lng: number;
+  Mobile?: number;
 };
